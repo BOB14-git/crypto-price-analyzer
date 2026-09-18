@@ -1,14 +1,12 @@
 import urllib.request, urllib.parse, urllib.error
-import http, json, ssl
+import json, ssl
 import sqlite3
 import datetime
 import time
 
 url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,cardano&vs_currencies=usd&include_24hr_change=true'
 
-ctx = ssl.create_default_context()
-ctx.check_hostname = False
-ctx.verify_mode = ssl.CERT_NONE
+ctx = ssl.create_default_context()
 
 req = urllib.request.Request(url, headers={'User-Agent' : 'Mozilla/5.0'})
 conn = sqlite3.connect('crypto_data.sqlite')
@@ -48,7 +46,7 @@ while True :
     except Exception as e:
        print("Error occurred:",e)
 
-    time.sleep(10)
+    time.sleep(30)
 
 
 
