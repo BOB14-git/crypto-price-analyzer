@@ -6,7 +6,8 @@ import time
 
 url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,cardano&vs_currencies=usd&include_24hr_change=true'
 
-ctx = ssl.create_default_context()
+ctx = ssl.create_default_context()
+
 
 req = urllib.request.Request(url, headers={'User-Agent' : 'Mozilla/5.0'})
 conn = sqlite3.connect('crypto_data.sqlite')
@@ -26,7 +27,7 @@ while True :
            now = str(datetime.datetime.now())
            cur.execute('INSERT INTO Prices (coin, price, change_24h, timestamp) VALUES (?, ?, ?, ?)',(coin, price, change_24h, now))
         conn.commit()
-        print('Data saved successfully! Waiting 10 seconds...')
+        print('Data saved successfully! Waiting 30 seconds...')
 
         cur.execute('SELECT coin, price, change_24h, timestamp FROM Prices')
         for row in cur :
