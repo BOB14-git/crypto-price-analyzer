@@ -27,7 +27,6 @@ while True :
            now = str(datetime.datetime.now())
            cur.execute('INSERT INTO Prices (coin, price, change_24h, timestamp) VALUES (?, ?, ?, ?)',(coin, price, change_24h, now))
         conn.commit()
-        print('Data saved successfully! Waiting 30 seconds...')
 
         cur.execute('SELECT coin, price, change_24h, timestamp FROM Prices')
         for row in cur :
@@ -43,6 +42,8 @@ while True :
         cur.execute('SELECT coin, MAX(price), MIN(price) FROM Prices GROUP BY coin')
         for row in cur :
             print(row[0],'Max:',round(row[1],2),'| Min:',round(row[2],2))
+            
+        print('Data saved successfully! Waiting 30 seconds...')
 
     except Exception as e:
        print("Error occurred:",e)
